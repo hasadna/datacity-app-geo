@@ -1,0 +1,77 @@
+@width: 400px;
+
+:host {
+    .container {
+        width: 0;
+        transition: width 500ms ease-in;
+        overflow: hidden;
+        display: flex;
+        flex-flow: row;
+        justify-content: flex-end;
+        max-height: 100vh;
+        overflow-y: scroll;
+
+        &.active {
+            width: @width;
+        }
+
+        .inner {
+            display: flex;
+            flex-flow: column;
+            align-items: flex-start;
+            width: @width;
+            height: 100%;
+            padding: 10px;
+            padding-bottom: 50px;
+    
+            hr {
+                width: 100%;
+            }
+
+            h1 {
+                font-size: 24px;
+                margin: 5px 0;
+                max-width: 90%;
+            }
+
+            .close {
+                align-self: flex-end;
+                font-size: 32px;
+                cursor: pointer;
+                position: absolute;
+            }
+
+            .gallery {
+                flex: 0 0 auto;
+                display: flex;
+                flex-flow: row;
+                overflow-x: scroll;
+                width: 100%;
+                scroll-snap-type: x mandatory;
+                scroll-behavior: smooth;
+    
+                img {
+                    flex: 0 0 auto;
+                    width: calc(@width - 40px);
+                    max-height: 250px;
+                    scroll-snap-align: center;
+                    margin: 3px;
+                }
+            }
+
+            .section {
+                h2 {
+                    font-size: 20px;
+                }
+
+                .item {
+                    margin-right: 20px;
+
+                    label {
+                        font-weight: bold;
+                    }
+                }
+            }
+        }
+    }
+}

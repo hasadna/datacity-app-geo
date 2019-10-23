@@ -1,0 +1,19 @@
+<div class='container' [class.active]='!!row' *ngIf='config'>
+  <div class='inner' *ngIf='row'>
+    <div class='close' (click)='clear.emit()'>&times;</div>
+    <h1>{{config.title(row)}}</h1>
+    <hr/>
+    <div class='gallery'>
+      <ng-container *ngFor='let idx of [0, 1, 2, 4]'>
+        <img [src]='config.gallery(row, idx)' onerror='this.style.display="none"' onload='this.style.display="block"'/>
+      </ng-container>
+    </div>
+    <div class='section' *ngFor='let section of config.sections'>
+      <h2>{{section.title}}</h2>
+      <div class='item' *ngFor='let item of section.items'>
+        <label>{{item.title}}:&nbsp;</label>
+        <span>{{item.value(row)}}</span>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+<div class='map' *ngIf='ready'
+     leaflet 
+     [leafletOptions]="options"
+     [leafletLayers]="layers"
+     (leafletMapReady)="onMapReady($event)"
+     (leafletMapMoveEnd)='changed()'
+     (leafletMapZoomEnd)='changed()'
+>
+</div>

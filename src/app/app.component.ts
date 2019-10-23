@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.less']
 })
 export class AppComponent {
-  title = 'datacity-app-geo';
+  selected: any = null;
+
+  select(row) {
+    console.log('selected', row);
+    this.selected = row;
+  }
+
 }
