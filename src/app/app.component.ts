@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ContentService } from './content.service';
 
 
 @Component({
@@ -8,6 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent {
   selected: any = null;
+  config: any = null;
+
+  constructor(private content: ContentService) { 
+    content.configuration.subscribe((config) => {
+      this.config = config;
+    });
+  }
 
   select(row) {
     console.log('selected', row);
