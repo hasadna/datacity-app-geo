@@ -34,7 +34,6 @@ export class MapComponent {
               private zone: NgZone) {
     content.configuration.subscribe((configuration) => {
       if (configuration) {
-        console.log('CONF', configuration);
         this.ready = false;
         this.query = configuration.query;
         this.options.center = configuration.center || this.options.center;
@@ -44,7 +43,7 @@ export class MapComponent {
           this.options.layers.push(geoJSON(configuration.layer, {filter: configuration.layerFilter}));
         }
         this.options.layers.push(
-          tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '...' })
+          tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '...' })
         );
         this.configuration = configuration;
 
