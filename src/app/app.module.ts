@@ -7,12 +7,14 @@ import { AppComponent } from './app.component';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { MapComponent } from './map/map.component';
 import { InfoPaneComponent } from './info-pane/info-pane.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MapComponent,
-    InfoPaneComponent
+    InfoPaneComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

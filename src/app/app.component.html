@@ -1,9 +1,7 @@
-<div class='container'>
-    <app-info-pane [row]='selected' (clear)='selected = null'></app-info-pane>
-    <app-map (selected)='select($event)'></app-map>
-    <div class='title' *ngIf='config'><h2>{{config.descriptor}}</h2></div>
-    <div class='credit'>
-        <a href='https://www.hasadna.org.il/' target='_blank'><img src='assets/datacity.png'/></a>
-        <a href='https://www.hasadna.org.il/' target='_blank'><img src='assets/hasadna.png'/></a>
+<div class='container' *ngIf='config'>
+    <app-header>{{config.descriptor}}</app-header>
+    <div class='main'>
+        <app-map [row]='selected' (selected)='select($event)'></app-map>
+        <app-info-pane [row]='selected' (clear)='selected = null'></app-info-pane>
     </div>
 </div>

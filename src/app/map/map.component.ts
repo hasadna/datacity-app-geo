@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, NgZone } from '@angular/core';
+import { Component, EventEmitter, Output, NgZone, Input, OnChanges } from '@angular/core';
 import { tileLayer, latLng, LatLngBounds, marker, icon, Map, geoJSON, MarkerOptions } from 'leaflet';
 import { distinctUntilChanged, debounceTime, switchMap } from 'rxjs/operators';
 import { Subject, from } from 'rxjs';
@@ -10,8 +10,9 @@ import { ContentService } from '../content.service';
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.less']
 })
-export class MapComponent {
+export class MapComponent implements OnChanges {
 
+  @Input() row = null;
   @Output() selected = new EventEmitter<any>();
 
   options = {
@@ -116,5 +117,14 @@ export class MapComponent {
   onMapReady(map_: Map) {
     this.map = map_;
     this.changed();
+  }
+
+  ngOnChanges() {
+    if (this.map) {
+      setTimeout(() => {
+        this.map.invalidateSize();
+        console.log('invalidated');
+      }, 1000);
+    }
   }
 }
