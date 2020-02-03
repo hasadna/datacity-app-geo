@@ -70,26 +70,32 @@ const configs = {
   },
   ashdod_business: {
     descriptor: 'מפת עסקים - אשדוד',
+    // query: `
+    //   with a as (select * from muni_businesses where "municipality-name" = 'אשדוד'),
+    //   b as (select "business-name", "property-code", "business-kind" from a where "source-kind"='רישוי עסקים'),
+    //   c as (select * from a where "source-kind"='ארנונה עסקים')
+    //   select "address-full", "property-code", b."business-name", b."business-kind", "location-lat", "location-lon" from c
+    //          join b using ("property-code") where b."business-name" is not null
+    // `,
     query: `
-      with a as (select * from muni_businesses where "municipality-name" = 'אשדוד'),
-      b as (select "business-name", "property-code", "business-kind" from a where "source-kind"='רישוי עסקים'),
-      c as (select * from a where "source-kind"='ארנונה עסקים')
-      select "address-full", "property-code", b."business-name", b."business-kind", "location-lat", "location-lon" from c
-             join b using ("property-code") where b."business-name" is not null
+      select * from muni_businesses where "municipality-name" = 'אשדוד' and "source-kind"='מאגר עסקים'
     `,
     title: field('business-name'),
     layer: 'assets/geojson/ashdod.geojson',
     center: latLng(31.799974756978738, 34.64384078979493),
     zoom: 12,
-    gallery: (row, idx) => `https://datacity-source-files.fra1.digitaloceanspaces.com` +
-                           `/69-AlQasum/Education/gallery/${row['school-symbol']}-${idx}.jpg`,
+    gallery: (row, idx) => {
+      const images = JSON.parse(row['property-code'] || "[]");
+      return `https://datacity-source-files.fra1.digitaloceanspaces.com` +
+             `/0070-Ashdod/Signage/img/${images[idx]}.jpg`;
+    },
     sections: [
       {
         title: 'פרטים',
         items: [
           {title: 'כתובת', value: field('address-full')},
           {title: 'מהות הנכס', value: field('business-kind')},
-          {title: 'מזהה נכס', value: field('property-code')},
+          {title: 'טלפון', value: field('business-phone-number')},
         ]
       },
     ]
