@@ -19,7 +19,7 @@ const configs = {
   alqasum: {
     descriptor: 'תמונה חינוכית - מועצת אל-קסום',
     query: `
-        select * from schools where "municipality-name" = 'אל קאסום'
+        select * from schools where "municipality-name" = 'אל קסום'
     `,
     title: field('school-name'),
     layer: 'assets/geojson/alqasum2.geojson',
